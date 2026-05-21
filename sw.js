@@ -1,4 +1,4 @@
-const CACHE = 'edulink-v7';
+const CACHE = 'edulink-v8';
 const SHELL = [
   './index.html',
   './style.css',

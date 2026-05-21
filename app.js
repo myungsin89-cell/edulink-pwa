@@ -198,12 +198,15 @@ function navigate(view) {
 }
 
 function updateHeader(view) {
+  const header = document.querySelector('header');
+  header.classList.toggle('main-header-hidden', view === 'main');
   document.querySelector('header h1').textContent =
-    view === 'main' ? '초록덕후' : '과목 설정';
+    view === 'main' ? '' : '과목 설정';
   const btn = document.getElementById('header-settings-btn');
-  btn.textContent = view === 'main' ? '설정' : '홈';
-  btn.title = view === 'main' ? '설정' : '홈으로';
-  btn.onclick = () => navigate(view === 'main' ? 'settings' : 'main');
+  btn.textContent = '홈';
+  btn.title = '홈으로';
+  btn.setAttribute('aria-label', '홈으로');
+  btn.onclick = () => navigate('main');
 }
 
 // ── Main View ──────────────────────────────────────────────────────
@@ -241,15 +244,13 @@ function renderMain(container) {
   }
 
   const statusText = visible.length > 0
-    ? `${visible.length}개 과목 바로가기 준비됨`
-    : '과목을 연결하면 바로 시작할 수 있어요';
+    ? `${visible.length}개 과목 바로가기 준비됨 · 카드를 눌러 수정`
+    : '카드를 눌러 과목을 설정하세요';
 
-  html += `<section class="hero-card" aria-labelledby="hero-title">
+  html += `<section class="hero-card" id="hero-settings-card" role="button" tabindex="0" aria-labelledby="hero-title" aria-label="과목 설정 열기">
     <div class="hero-icon" aria-hidden="true">📚</div>
     <h2 id="hero-title">교과서 바로가기</h2>
-    <p class="hero-desc">자주 쓰는 출판사 교과서 자료실을 과목별로 모아 앱처럼 빠르게 여세요.</p>
-    <p class="hero-status">초록덕후 링크 허브 · ${escapeHtml(statusText)}</p>
-    ${visible.length === 0 ? '<button class="hero-cta" id="hero-setup-btn">과목 설정하기</button>' : ''}
+    <p class="hero-status">${escapeHtml(statusText)}</p>
   </section>`;
 
   if (visible.length === 0) {
@@ -274,16 +275,19 @@ function renderMain(container) {
       </a>`;
     }
     html += `</div>`;
-    html += `<div class="main-actions">
-      <button class="settings-link" id="open-settings-card">과목 설정 수정</button>
-    </div>`;
   }
 
   container.innerHTML = html;
 
   // 이벤트 바인딩
-  document.getElementById('hero-setup-btn')?.addEventListener('click', () => navigate('settings'));
-  document.getElementById('open-settings-card')?.addEventListener('click', () => navigate('settings'));
+  const heroSettingsCard = document.getElementById('hero-settings-card');
+  heroSettingsCard?.addEventListener('click', () => navigate('settings'));
+  heroSettingsCard?.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navigate('settings');
+    }
+  });
 
   document.getElementById('install-btn')?.addEventListener('click', async () => {
     if (!deferredPrompt) return;
