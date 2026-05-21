@@ -352,6 +352,34 @@ footer {
 }
 .color-swatch:hover { transform: scale(1.15); border-color: rgba(0,0,0,0.3); }
 
+.move-controls {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.move-btn {
+  width: 24px;
+  height: 16px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: white;
+  color: var(--text-secondary);
+  font-size: 0.58rem;
+  line-height: 1;
+  cursor: pointer;
+  font-family: inherit;
+}
+.move-btn:hover:not(:disabled) {
+  background: var(--primary-light);
+  border-color: #A5D6A7;
+  color: var(--primary-dark);
+}
+.move-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
 .color-input {
   position: absolute;
   opacity: 0;

@@ -310,9 +310,9 @@ function renderSettings(container, draftSubjects = null) {
   const subjects = draftSubjects ? cloneSubjects(draftSubjects) : cloneSubjects(store.getSubjects());
 
   let html = `<div class="settings-section">
-    <p class="section-header">과목별 출판사 연결 &amp; 표시 설정</p>`;
+    <p class="section-header">과목별 출판사 연결 · 표시 · 순서 설정</p>`;
 
-  for (const s of subjects) {
+  for (const [idx, s] of subjects.entries()) {
     const hasUrl = isValidUrl(s.url);
     const isCustom = s.publisherId === 'custom';
     const visActive = !!s.visible && hasUrl;
@@ -328,6 +328,10 @@ function renderSettings(container, draftSubjects = null) {
         <label class="color-swatch" style="background:${escapeHtml(color)}" title="색상 변경">
           <input type="color" class="color-input" value="${escapeHtml(color)}" />
         </label>
+        <div class="move-controls" aria-label="${escapeHtml(s.name)} 순서 변경">
+          <button class="move-btn move-up" title="위로 이동" aria-label="${escapeHtml(s.name)} 위로 이동" ${idx === 0 ? 'disabled' : ''}>▲</button>
+          <button class="move-btn move-down" title="아래로 이동" aria-label="${escapeHtml(s.name)} 아래로 이동" ${idx === subjects.length - 1 ? 'disabled' : ''}>▼</button>
+        </div>
         <span class="row-name">${escapeHtml(s.name)}</span>
         <select class="pub-select">${options}</select>
         <button class="vis-btn ${visActive ? 'active' : ''}"
@@ -490,6 +494,23 @@ function renderSettings(container, draftSubjects = null) {
     btn.addEventListener('click', () => {
       if (btn.disabled) return;
       setVisButton(btn, !btn.classList.contains('active'), false);
+    });
+  });
+
+  // ── 이벤트: 과목 순서 변경 ──
+  container.querySelectorAll('.move-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.disabled) return;
+      collectDraftFromRows(false);
+      const row = btn.closest('.setting-row');
+      const id = row.dataset.id;
+      const idx = subjects.findIndex(s => s.id === id);
+      if (idx < 0) return;
+      const direction = btn.classList.contains('move-up') ? -1 : 1;
+      const nextIdx = idx + direction;
+      if (nextIdx < 0 || nextIdx >= subjects.length) return;
+      [subjects[idx], subjects[nextIdx]] = [subjects[nextIdx], subjects[idx]];
+      renderSettings(container, subjects);
     });
   });
 
