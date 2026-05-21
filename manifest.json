@@ -4,8 +4,8 @@
   "description": "과목별 출판사 교육자료 사이트 바로가기",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#2E7D32",
-  "theme_color": "#2E7D32",
+  "background_color": "#F1F8E9",
+  "theme_color": "#F1F8E9",
   "lang": "ko",
   "orientation": "portrait-primary",
   "icons": [
