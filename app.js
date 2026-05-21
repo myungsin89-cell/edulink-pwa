@@ -1,14 +1,14 @@
 // ── 출판사 데이터 ──────────────────────────────────────────────────
 const PUBLISHERS = [
   { id: '',         name: '-- 출판사 선택 --',          url: '' },
-  { id: 'tsherpa',  name: '천재교과서 (티셀파)',         url: 'https://text.tsherpa.co.kr/ele/index.html' },
+  { id: 'tsherpa',  name: '천재교과서 (티셀파)',         url: 'https://ele.tsherpa.co.kr/' },
   { id: 'mirae',    name: '미래엔 교과서',               url: 'https://textbook.mirae-n.com/textbook/textBookList.mrn?educationlevelcode=01' },
   { id: 'vivasam',  name: '비상교육 (비바샘)',           url: 'https://e.vivasam.com/main' },
-  { id: 'douclass', name: '동아출판 (두클래스 초등)',     url: 'https://ele.douclass.com' },
+  { id: 'douclass', name: '동아출판 (두클래스 초등)',     url: 'https://ele.douclass.com/' },
   { id: 'ybm',      name: 'YBM (와이클라우드)',          url: 'https://www.ybmcloud.com/main.html?siteType=E' },
   { id: 'kumsung',  name: '금성출판사 (티칭허브 초등)',   url: 'https://thub.kumsung.co.kr/elementary/main.do' },
   { id: 'jihak',    name: '지학사 (티솔루션)',            url: 'https://tsol.jihak.co.kr/main.ez' },
-  { id: 'iscream',  name: '아이스크림 교과서',            url: 'https://text.i-scream.co.kr' },
+  { id: 'iscream',  name: '아이스크림 교과서',            url: 'https://www.i-scream.co.kr/user/main/MainPage.do' },
   { id: 'custom',   name: '직접 입력',                   url: '' },
 ];
 
