@@ -361,6 +361,10 @@ function renderSettings(container, draftSubjects = null) {
     </div>
   </div>`;
 
+  html += `<div class="browser-guide" aria-label="브라우저 안내">
+    크롬·엣지 등 특정 브라우저로 열고 싶다면 기기 설정에서 기본 브라우저를 변경해 주세요.
+  </div>`;
+
   html += `<div class="settings-actions">
     <button class="btn-cancel" id="cancel-btn">취소</button>
     <button class="btn-save" id="save-btn">저장하기</button>
