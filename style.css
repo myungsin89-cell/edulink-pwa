@@ -534,6 +534,7 @@ footer {
   font-size: 0.84rem;
   line-height: 1.55;
 }
+.browser-guide p + p { margin-top: 6px; }
 
 /* 저장/취소 */
 .settings-actions {

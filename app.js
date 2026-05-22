@@ -219,7 +219,7 @@ function renderMain(container) {
   // PWA 설치 배너 (Android/Chrome)
   if (!isStandalone() && !store.isInstallDismissed() && deferredPrompt) {
     html += `<div class="install-banner" id="install-banner">
-      <p>바탕화면에 앱으로 설치하면 더 빠르게 열 수 있어요!</p>
+      <p>크롬에서 접속한 뒤 설치하면 바탕화면 앱처럼 빠르게 열 수 있어요!</p>
       <button class="install-btn" id="install-btn">설치</button>
       <button class="dismiss-btn" id="dismiss-btn">✕</button>
     </div>`;
@@ -237,7 +237,7 @@ function renderMain(container) {
   // 최초 방문 팁
   if (store.isFirstVisit()) {
     html += `<div class="tip-box" id="tip-box">
-      <span>처음에는 <strong>과목 설정</strong>에서 과목과 출판사 사이트를 연결하세요!</span>
+      <span>설치 버튼이 보이지 않으면 크롬을 열고 주소창에 앱 주소를 붙여넣어 접속해 주세요.</span>
       <button class="tip-close" id="tip-close">✕</button>
     </div>`;
     if (!store.markVisited()) showToast('방문 기록을 저장하지 못했습니다.');
@@ -362,7 +362,8 @@ function renderSettings(container, draftSubjects = null) {
   </div>`;
 
   html += `<div class="browser-guide" aria-label="브라우저 안내">
-    크롬·엣지 등 특정 브라우저로 열고 싶다면 기기 설정에서 기본 브라우저를 변경해 주세요.
+    <p>설치 버튼이 보이지 않으면 크롬을 열고 주소창에 앱 주소를 붙여넣어 접속해 주세요.</p>
+    <p>크롬·엣지 등 특정 브라우저로 열고 싶다면 기기 설정에서 기본 브라우저를 변경해 주세요.</p>
   </div>`;
 
   html += `<div class="settings-actions">
